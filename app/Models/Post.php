@@ -9,4 +9,8 @@ class Post extends Model
 {
     use HasFactory;
    protected $table = 'posts';
+   //разрешает модели изменение атрибутов всех
+   protected $guarded = [];
+   //разрешить модели изменять некоторые значения атрибутов
+//   protected $fillable = ['title','content'];
 }

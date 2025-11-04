@@ -22,4 +22,55 @@ class PostController extends Controller
 //        }
 //       dd($post);
     }
+    //метод на создание записей в бд
+    public function create(){
+        $postsArr = [
+            [
+            'title' => 'title of post from phpstorm',
+            'content' => 'some interesting content',
+            'image' => 'imageblabla.jpg',
+            'likes' => 20,
+            'is_published' => 1,
+            ],
+            [
+            'title' => 'another of post from phpstorm',
+            'content' => 'some interesting content',
+            'image' => 'imageblabla.jpg',
+            'likes' => 20,
+            'is_published' => 1,
+        ],
+          [
+                'title' => 'title of post from phpstorm',
+                'content' => 'some interesting content',
+                'image' => 'imageblabla.jpg',
+                'likes' => 50,
+                'is_published' => 1,
+          ]
+        ];
+//создать одну запись
+//        Post::create([
+//            'title' => 'another of post from phpstorm',
+//            'content' => 'some interesting content',
+//            'image' => 'imageblabla.jpg',
+//            'likes' => 20,
+//            'is_published' => 1,
+//        ]);
+//создать много записей
+//        foreach ($postsArr as $item){
+//            Post::create(
+//                $item
+//            );
+//        }
+// по элементам
+        foreach ($postsArr as $item){
+            Post::create([
+                'title' => $item['title'],
+                'content' => $item['content'],
+                'image' => $item['image'],
+                'likes' => $item['likes'],
+                'is_published' => $item['is_published'],
+            ]);
+        }
+        dd('created');
+    }
 }
