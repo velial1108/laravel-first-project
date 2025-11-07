@@ -16,11 +16,11 @@ class PostController extends Controller
 //        $posts = Post::where('is_published', 1) -> get();
 //        dump($posts);
         //Первая запись выполняющая условие
-        $posts = Post::where('is_published', 1) -> first();
+        $posts = Post::all();
 //        foreach ( $posts as $post) {
 //            dump($post->title);
 //        }
-//       dd($post);
+        return view('posts', compact('posts'));
     }
     //метод на создание записей в бд
     public function create(){
