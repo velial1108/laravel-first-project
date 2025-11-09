@@ -20,17 +20,27 @@ Route::get('/my-page', [MyPlaceController::class, 'index']
 
 
 ///Роуты с именем для правильного поиска
-Route::get('/posts', [PostController::class, 'index'])->name('post.index');
+
+
+
+
 Route::get('/main', [MainController::class, 'index'])->name('main.index');
 Route::get('/contacts', [ContactsController::class, 'index'])->name('contact.index');
 Route::get('/about', [AboutController::class, 'index'])->name('about.index');
 
+//CRUD
+//Read
+Route::get('/posts', [PostController::class, 'index'])->name('post.index');
+//Create форма
+Route::get('/posts/create', [PostController::class, 'create'])->name('post.create');
+//хранилище действий
+Route::post('/posts', [PostController::class, 'store'])->name('post.store');
+//работа с отдельным постом
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('post.show');
+Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
+Route::patch('/posts/{post}', [PostController::class, 'update'])->name('post.update');
+Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('post.delete');
 
-
-
-
-
-Route::get('/posts/create', [PostController::class, 'create']);
 Route::get('/posts/update', [PostController::class, 'update']);
 Route::get('/posts/delete', [PostController::class, 'delete']);
 Route::get('/posts/restore', [PostController::class, 'restore']);

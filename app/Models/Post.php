@@ -11,6 +11,7 @@ class Post extends model
 
     use HasFactory;
     use SoftDeletes;
+    //определяем нашу таблицу
    protected $table = 'posts';
    //разрешает модели изменение атрибутов всех
    protected $guarded = [];
