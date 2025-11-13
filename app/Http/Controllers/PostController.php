@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 
 class PostController extends Controller
 {
     public function index (){
+
+//        $categories = Category::find(1);
+//        dd($categories->post);
         $posts = Post::all();
+//        dd($post->category);
+
         return view('post.index', compact('posts'));
     }
     public function store (){

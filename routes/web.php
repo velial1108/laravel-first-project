@@ -40,18 +40,22 @@ Route::get('/posts/{post}', [PostController::class, 'show'])->name('post.show');
 Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
 Route::patch('/posts/{post}', [PostController::class, 'update'])->name('post.update');
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('post.delete');
-
 Route::get('/posts/update', [PostController::class, 'update']);
 Route::get('/posts/delete', [PostController::class, 'delete']);
 Route::get('/posts/restore', [PostController::class, 'restore']);
 Route::get('/posts/first_or_create', [PostController::class, 'firstOrCreate']);
 Route::get('/posts/update_or_create', [PostController::class, 'updateOrCreate']);
+//Customers CRUD
+Route::get('/customers', [CustomerController::class, 'index'])->name('customer.index');
+Route::get('/customers/create', [CustomerController::class, 'create'])->name('customer.create');
+Route::post('/customers', [CustomerController::class, 'store'])->name('customer.store');
+Route::get('/customers/{customer}', [CustomerController::class, 'show'])->name('customer.show');
+Route::get('/customers/{customer}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
+Route::patch('/customers/{customer}', [CustomerController::class, 'update'])->name('customer.update');
+Route::delete('/customers/{customer}', [CustomerController::class, 'destroy'])->name('customer.delete');
 
 
 
-
-Route::get('/customers', [CustomerController::class, 'index']
-);
 Route::get('/my-town', [MyTownController::class, 'index']);
 Route::get('my-hobby', function (){
     return 'Programming';

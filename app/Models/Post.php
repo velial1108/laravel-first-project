@@ -17,4 +17,7 @@ class Post extends model
    protected $guarded = [];
    //разрешить модели изменять некоторые значения атрибутов
 //   protected $fillable = ['title','content'];
+    function category(){
+        return $this->belongsTo(Category::class);
+    }
 }

@@ -21,6 +21,13 @@ return new class extends Migration
             $table->timestamps();
 
             $table->softDeletes();
+
+            //unsigned нет отрицательных
+            $table->unsignedBigInteger('category_id')->nullable();
+            //индекс на внешник ключ категори с именем post_category_idx
+            $table->index('category_id', 'post_category_idx');
+            //внешний ключ создание название on на что ссылается таблица и название атрибута
+            $table->foreign('category_id', 'post_category_fk')->on('categories')->references('id');
         });
     }
 
