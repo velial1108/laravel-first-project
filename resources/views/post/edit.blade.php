@@ -21,6 +21,16 @@
                 <input type="text" name="image" class="form-control" id="image" placeholder="Image" value="{{$post->image}}">
             </div>
         </div>
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select class="form-control" id="category" name="category_id">
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}" @selected($category->id == $post->category_id)>
+                        {{ $category->title }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
 @endsection
