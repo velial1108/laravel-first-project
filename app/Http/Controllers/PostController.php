@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\PostTag;
 use App\Models\Tag;
 
 class PostController extends Controller
@@ -18,13 +19,22 @@ class PostController extends Controller
     public function store()
     {
         $data = request()->validate([
-            'title' => 'string',
+            'title' => 'required | string',
             'content' => 'string',
             'image' => 'string',
             'category_id' => '',
+            'tags' => '',
         ]);
-//        dd($data);
-        Post::create($data);
+        $tags = $data['tags'];
+        unset($data['tags']);
+
+        $post = Post::create($data);
+        // Здесь мы передаем для таблицы которая работает с отношением многие ко многим данные по выбранным id из tags и post id из пост
+        // и передает это в функцию tags() которая написана в модели чтобы создать все в таблице PostTags
+      $post->tags()->attach($tags);
+//        dd($tags, $data);
+
+
         return redirect()->route('post.index');
     }
 
@@ -37,13 +47,15 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('post.create', compact('categories'));
+        $tags = Tag::all();
+        return view('post.create', compact('categories', 'tags'));
     }
 
     public function edit(Post $post)
     {
+        $tags = Tag::all();
         $categories = Category::all();
-        return view('post.edit', compact('post', 'categories'));
+        return view('post.edit', compact('post', 'categories', 'tags'));
     }
 
 // пример обновления данных
@@ -54,8 +66,13 @@ class PostController extends Controller
             'content' => 'string',
             'image' => 'string',
             'category_id' => '',
+            'tags' => '',
         ]);
+        $tags = $data['tags'];
+        unset($data['tags']);
+//        dd($data);
         $post->update($data);
+        $post->tags()->sync($tags);
         return redirect()->route('post.show', $post->id);
     }
 
