@@ -7,21 +7,16 @@ use App\Http\Requests\Post\StoreRequest;
 use App\Models\Post;
 
 
-class StoreController extends Controller
+class StoreController extends BaseController
 {
     //если в роуте произойдет вызов этого класса то самый первый запустится invoke
     //аргумент наш request с валидацией
-        public function __invoke(StoreRequest $request)
-        {
-            $data = $request->validated();
-            $tags = $data['tags'];
-            unset($data['tags']);
+    public function __invoke(StoreRequest $request)
+    {
+        $data = $request->validated();
 
-            $post = Post::create($data);
-            // Здесь мы передаем для таблицы которая работает с отношением многие ко многим данные по выбранным id из tags и post id из пост
-            // и передает это в функцию tags() которая написана в модели чтобы создать все в таблице PostTags
-            $post->tags()->attach($tags);
-//        dd($tags, $data);
+        $this->service->store($data);
+
 
             return redirect()->route('post.index');
         }

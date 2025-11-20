@@ -7,17 +7,16 @@ use App\Http\Requests\Post\UpdateRequest;
 use App\Models\Post;
 
 
-class UpdateController extends Controller
+class UpdateController extends BaseController
 {
     //если в роуте произойдет вызов этого класса то самый первый запустится invoke
         public function __invoke(UpdateRequest $request,Post $post)
         {
-            $data = request()->validated();
-            $tags = $data['tags'];
-            unset($data['tags']);
-//        dd($data);
-            $post->update($data);
-            $post->tags()->sync($tags);
+            //НЕ ЗАБЫТЬ ПОМЕНЯТЬ requst на $request
+            $data = $request->validated();
+            //передаем параметры которые получаем по $post и результат валидации $data
+            $this->service->update($post, $data);
+
             return redirect()->route('post.show', $post->id);
         }
 }

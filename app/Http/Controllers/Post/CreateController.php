@@ -8,7 +8,7 @@ use App\Models\Post;
 use App\Models\Tag;
 
 
-class CreateController extends Controller
+class CreateController extends BaseController
 {
     //если в роуте произойдет вызов этого класса то самый первый запустится invoke
         public function __invoke()
