@@ -3,21 +3,17 @@
 namespace App\Http\Controllers\Post;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\StoreRequest;
 use App\Models\Post;
 
 
 class StoreController extends Controller
 {
     //если в роуте произойдет вызов этого класса то самый первый запустится invoke
-        public function __invoke()
+    //аргумент наш request с валидацией
+        public function __invoke(StoreRequest $request)
         {
-            $data = request()->validate([
-                'title' => 'required | string',
-                'content' => 'string',
-                'image' => 'string',
-                'category_id' => '',
-                'tags' => '',
-            ]);
+            $data = $request->validated();
             $tags = $data['tags'];
             unset($data['tags']);
 
