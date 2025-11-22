@@ -11,7 +11,7 @@ class IndexController extends BaseController
     //если в роуте произойдет вызов этого класса то самый первый запустится invoke
         public function __invoke()
         {
-            $posts = Post::all();
+            $posts = Post::paginate(10);
             return view('post.index', compact('posts'));
         }
 }
