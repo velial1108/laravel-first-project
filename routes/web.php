@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyPlaceController;
 
 Route::get('/', function () {
-    return 'aaaaa';
+    return redirect()->route('main.index');
 });
 
 Route::get('/my-page', [MyPlaceController::class, 'index']

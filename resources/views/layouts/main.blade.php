@@ -29,6 +29,8 @@
         </div>
     </div>
 </nav>
-@yield('content')
+<div class="container mt-2 ms-2">
+    @yield('content')
+</div>
 </body>
 </html>
