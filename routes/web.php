@@ -9,6 +9,7 @@ use App\Http\Controllers\Post\CreateController;
 use App\Http\Controllers\Post\DestroyController;
 use App\Http\Controllers\Post\EditController;
 use App\Http\Controllers\Post\IndexController;
+use App\Http\Controllers\Admin\Post\{IndexController as IndexControllerAdmin};
 use App\Http\Controllers\Post\ShowController;
 use App\Http\Controllers\Post\StoreController;
 use App\Http\Controllers\Post\UpdateController;
@@ -30,6 +31,11 @@ Route::get('/my-page', [MyPlaceController::class, 'index']
 
 
 
+Route::group(['prefix' => 'admin'], function () {
+    Route::group([], function () {
+        Route::get('/post', IndexControllerAdmin::class)->name('admin.post.index');
+    });
+});
 
 Route::get('/main', [MainController::class, 'index'])->name('main.index');
 Route::get('/contacts', [ContactsController::class, 'index'])->name('contact.index');
@@ -77,3 +83,7 @@ Route::get('/my-samara-car', function(){
 Route::get('/my-modal-processor', function (){
     return 'intel core i7 8700';
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
