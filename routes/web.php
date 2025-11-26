@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\MyTownController;
 use App\Http\Controllers\Post\CreateController;
@@ -17,9 +18,8 @@ use App\Http\Controllers\Post\UpdateController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyPlaceController;
 
-Route::get('/', function () {
-    return redirect()->route('main.index');
-});
+Route::get('/', [HomeController::class, 'index']);
+
 
 Route::get('/my-page', [MyPlaceController::class, 'index']
 );
