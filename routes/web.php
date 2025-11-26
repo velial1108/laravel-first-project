@@ -18,7 +18,7 @@ use App\Http\Controllers\Post\UpdateController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyPlaceController;
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 Route::get('/my-page', [MyPlaceController::class, 'index']
@@ -31,7 +31,7 @@ Route::get('/my-page', [MyPlaceController::class, 'index']
 
 
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware'=>'admin'], function () {
     Route::group([], function () {
         Route::get('/post', IndexControllerAdmin::class)->name('admin.post.index');
     });
