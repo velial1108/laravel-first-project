@@ -14,6 +14,7 @@ class IndexController extends BaseController
     //если в роуте произойдет вызов этого класса то самый первый запустится invoke
         public function __invoke(FilterRequest $request)
         {
+            $this->authorize('admin');
             $data = $request->validated();
             $filter = app()->make(PostFilter::class, ['queryParams' => array_filter($data)]);
             $posts = Post::filter($filter)->paginate(10);

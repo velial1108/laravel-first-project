@@ -25,6 +25,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('contact.index')}}">Contacts</a>
                 </li>
+                @can('admin')
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('admin.post.index')}}">Admin</a>
+                </li>
+              @endcan
             </ul>
         </div>
     </div>

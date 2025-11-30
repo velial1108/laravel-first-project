@@ -16,19 +16,17 @@ class IndexController extends BaseController
             $data = $request->validated();
             $filter = app()->make(PostFilter::class, ['queryParams' => array_filter($data)]);
 
+            // Начинаем с базового запроса
+            $query = Post::query();
 
-            //Так не делают просто пример фильтра через строку поиска
-//            $query = Post::query();
-//            if (isset($data['category_id'])) {
-//                $query->where('category_id', $data['category_id']);
-//            }
-//            if (isset($data['content'])) {
-//                $query->where('content', 'Like',"%{$data['content']}%");
-//            }
-//            $post = $query->get();
-//            dd($post);
-            $posts = Post::filter($filter)->paginate(10);
-//            dd($posts->items()); // или просто dd($posts);
+            // Проверяем: если пользователь НЕ админ (или не залогинен) — фильтруем только опубликованные
+            if (! auth()->check() || auth()->user()->role !== 'admin') {
+                $query->where('is_published', 1);
+            }
+
+            // Применяем ваш фильтр (категория, поиск и т.д.)
+            $posts = $query->filter($filter)->paginate(10);
+
             return view('post.index', compact('posts'));
         }
 }
