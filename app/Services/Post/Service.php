@@ -13,7 +13,7 @@ class Service
             // Здесь мы передаем для таблицы которая работает с отношением многие ко многим данные по выбранным id из tags и post id из пост
             // и передает это в функцию tags() которая написана в модели чтобы создать все в таблице PostTags
             $post->tags()->attach($tags);
-//        dd($tags, $data);
+            return $post;
         }
         public function update($post, $data){
             $tags = $data['tags'];
@@ -21,5 +21,7 @@ class Service
 //        dd($data);
             $post->update($data);
             $post->tags()->sync($tags);
+            $post = $post->fresh();
+            return $post;
         }
 }
