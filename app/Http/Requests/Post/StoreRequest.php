@@ -26,8 +26,10 @@ class StoreRequest extends FormRequest
             'content' => 'string',
             'image' => 'string',
             'likes' => '',
-            'category_id' => '',
+            'category' => '',
             'tags' => '',
+            //Задание конкретного атрибута из приходящего объекта которому можно задать правила
+            'tags.*.title' => '',
         ];
     }
 }

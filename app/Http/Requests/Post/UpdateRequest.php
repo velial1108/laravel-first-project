@@ -27,8 +27,11 @@ class UpdateRequest extends FormRequest
             'title' => 'string',
             'content' => 'string',
             'image' => 'string',
-            'category_id' => '',
+            'likes' => '',
+            'category' => '',
             'tags' => '',
+            //Задание конкретного атрибута из приходящего объекта которому можно задать правила
+            'tags.*.title' => '',
         ];
     }
 }
